@@ -3,14 +3,16 @@ FROM eclipse-temurin:17-jdk-focal
 
 WORKDIR /app
 
+# Install Maven inside container
+RUN apt-get update && \
+    apt-get install -y maven && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy backend folder into container
 COPY . /app
 
-# Make Maven wrapper executable
-RUN chmod +x mvnw
-
-# Build the Spring Boot app (skip tests for speed)
-RUN ./mvnw clean package -DskipTests
+# Build Spring Boot app (skip tests for speed)
+RUN mvn clean package -DskipTests
 
 # Expose Spring Boot port
 EXPOSE 8080
