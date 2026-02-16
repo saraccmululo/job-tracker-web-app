@@ -1,12 +1,15 @@
-# Use valid Java 17 image
+# Use a stable Java 17 image
 FROM eclipse-temurin:17-jdk-focal
 
 WORKDIR /app
 
-# Copy backend folder contents
+# Copy backend folder into container
 COPY . /app
 
-# Build the project (skip tests for faster deployment)
+# Make Maven wrapper executable
+RUN chmod +x mvnw
+
+# Build the Spring Boot app (skip tests for speed)
 RUN ./mvnw clean package -DskipTests
 
 # Expose Spring Boot port
