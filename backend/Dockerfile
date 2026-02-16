@@ -1,17 +1,16 @@
-# Use official Java 17 image
-FROM openjdk:17-jdk-slim
+# Use valid Java 17 image
+FROM eclipse-temurin:17-jdk-focal
 
-# Set working directory inside container
 WORKDIR /app
 
-# Copy the backend folder into the container
+# Copy backend folder contents
 COPY . /app
 
-# Build the Spring Boot app (skip tests for faster build)
+# Build the project (skip tests for faster deployment)
 RUN ./mvnw clean package -DskipTests
 
-# Expose the port your app runs on
+# Expose Spring Boot port
 EXPOSE 8080
 
-# Run the app using the generated JAR
+# Run the generated JAR
 CMD ["java", "-jar", "target/jobtracker-0.0.1-SNAPSHOT.jar"]
