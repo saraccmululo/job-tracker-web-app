@@ -13,11 +13,17 @@ public class JobTrackerService {
 
     private final JobTrackerRepository repo;
 
-    public JobTrackerService(JobTrackerRepository repo) { this.repo = repo; }
+    public JobTrackerService(JobTrackerRepository repo) { 
+        this.repo = repo; 
+    }
 
-    public List<JobApplication> findAll() { return repo.findAll(); }
+    public List<JobApplication> findAll() { 
+        return repo.findAll(); 
+    }
 
-    public JobApplication save(JobApplication jobApp) { return repo.save(jobApp); }
+    public JobApplication save(JobApplication jobApp) { 
+        return repo.save(jobApp); 
+    }
 
     public JobApplication update(Long id, JobApplication details) {
         JobApplication jobApp = repo.findById(id)
